@@ -1,29 +1,72 @@
-import = [
-  "~/.config/alacritty/catppuccin-mocha.toml"
-]
+# Alacritty Configuration File (TOML format)
 
-[env]
-TERM = "xterm-256color"
+[window]
+dynamic_title = true
+decorations = "full"
+opacity = 0.95
+
+[window.padding]
+x = 10
+y = 10
 
 [font]
-size = 14.0
-
-[font.bold]
-# family = "MesloLGS Nerd Font Mono"
-family = "CaskaydiaCove Nerd Font"
-style = "Bold"
-
-[font.bold_italic]
-family = "CaskaydiaCove Nerd Font"
-# family = "MesloLGS Nerd Font Mono"
-style = "Bold Italic"
-
-[font.italic]
-family = "CaskaydiaCove Nerd Font"
-# family = "MesloLGS Nerd Font Mono"
-style = "Italic"
+size = 12.0
 
 [font.normal]
-# family = "MesloLGS Nerd Font Mono"
-family = "CaskaydiaCove Nerd Font"
+family = "DejaVu Sans Mono"
 style = "Regular"
+
+[font.bold]
+family = "DejaVu Sans Mono"
+style = "Bold"
+
+[font.italic]
+family = "DejaVu Sans Mono"
+style = "Italic"
+
+[font.offset]
+x = 0
+y = 0
+
+[cursor]
+unfocused_hollow = true
+
+[cursor.style]
+shape = "Block"
+blinking = "On"
+
+[colors.primary]
+background = "#232136"
+foreground = "#e0def4"
+
+[colors.normal]
+black   = "#393552"
+red     = "#eb6f92"
+green   = "#a3be8c"
+yellow  = "#f6c177"
+blue    = "#9ccfd8"
+magenta = "#c4a7e7"
+cyan    = "#31748f"
+white   = "#ffffff"
+
+[colors.bright]
+black   = "#6e6a86"
+red     = "#eb6f92"
+green   = "#a3be8c"
+yellow  = "#f6c177"
+blue    = "#9ccfd8"
+magenta = "#c4a7e7"
+cyan    = "#31748f"
+white   = "#ffffff"
+
+[selection]
+save_to_clipboard = true
+
+[terminal.shell]
+program = "/bin/fish"
+args = ["--login"]
+
+[mouse]
+hide_when_typing = true
+
+[terminal]
