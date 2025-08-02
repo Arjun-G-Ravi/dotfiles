@@ -1,5 +1,7 @@
 if status is-interactive
-    starship init fish | source
+    if test "$TERMINAL" = "alacritty" -o "$TERM" = "alacritty"
+        starship init fish | source
+    end
     zoxide init fish | source 
 	set -g fish_greeting ""
     # Commands to run in interactive sessions can go here
