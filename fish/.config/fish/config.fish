@@ -1,4 +1,5 @@
 if status is-interactive
+    fish_add_path /opt/cuda/bin
     if test "$TERMINAL" = "alacritty" -o "$TERM" = "alacritty"
         starship init fish | source
     end

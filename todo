@@ -1,8 +1,8 @@
 add all old featres for hyprland from i3 like keybindings
 modify shortcuts in browser
-add features in waybar
+@REM add features in waybar
 set up fish shortcuts like ai
 fix lockscreen - higher time, no lock-block, cleaner, why take time to type
-set up GPU drivers and all
-set up python env ,cuda
-
+@REM set up GPU drivers and all
+@REM set up python env ,cuda
+disc, whatspa,calibre, obsidian, melendi...y, other apps

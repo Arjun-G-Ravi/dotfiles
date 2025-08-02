@@ -34,9 +34,9 @@
     "on-click": "alacritty -e nmtui"
   },
   "bluetooth": {
-    "format": "<span size='13000' foreground='#89b4fa'>❌</span>",
-    "format-disabled": "<span size='13000' foreground='#6c7086'>❌</span>",
-    "format-off": "<span size='13000' foreground='#6c7086'>❌</span>",
+    "format": "<span size='13000' foreground='#89b4fa'>🎧❌</span>",
+    "format-disabled": "<span size='13000' foreground='#6c7086'>🎧❌</span>",
+    "format-off": "<span size='13000' foreground='#6c7086'>🎧❌</span>",
     "format-connected": "<span size='13000' foreground='#a6e3a1'>🎧</span>",
     "tooltip-format": "{status}",
     "tooltip-format-connected": "Connected: {device_alias}",
@@ -46,7 +46,7 @@
     "format": "<span size='13000'>{icon}</span>",
     "format-muted": "<span size='13000'></span>",
     "format-icons": {
-      "default": ["sd", "🔊", "🔊"]
+      "default": [":(", "🔊", "🔊"]
     },
     "tooltip-format": "Volume: {volume}%",
     "on-click": "pavucontrol --tab=3"
@@ -57,6 +57,6 @@
     "exec": "echo 'CPU: '$(~/.config/waybar/helper/cpu_usage.sh)' | RAM: '$(~/.config/waybar/helper/memory_used.sh)' | GPU: '$(~/.config/waybar/helper/gpu_usage.sh)' | VRAM: '$(~/.config/waybar/helper/gpu_memory.sh)",
     "interval": 2,
     "tooltip-format": " {}",
-    "on-click": "gnome-system-monitor"
+    "on-click": "alacritty -e btop"
   }
 }
