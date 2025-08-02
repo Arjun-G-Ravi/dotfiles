@@ -4,8 +4,10 @@
 @REM set up python env ,cuda
 fix boot time
 exchange esc and CAPS
-
-add all old featres for hyprland from i3 like keybindings
-modify shortcuts in browser
-disc, whatspa,calibre, obsidian, melendi...y, other apps
 set up fish shortcuts like ai
+add all old featres for hyprland from i3 like keybindings
+modify shortcuts in browsercow
+
+
+disc, whatspa,calibre, obsidian, melendi...y, other apps
+startup 

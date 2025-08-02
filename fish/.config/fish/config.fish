@@ -4,7 +4,7 @@ if status is-interactive
         starship init fish | source
     end
     zoxide init fish | source 
-	set -g fish_greeting "cow"
+	set -g fish_greeting ""
     # Commands to run in interactive sessions can go here
     bind \t forward-char
     bind \cv fish_clipboard_paste
@@ -17,7 +17,7 @@ if status is-interactive
     set -Ux fish_user_paths $fish_user_paths /home/arjun/.local/bin
 
     # My custom things
-    # alias ai 'code /home/arjun/Desktop/GitHub/AI-Notes && q'
+    alias ai 'code /home/arjun/dev/AI-Notes && q'
     # alias non-ai 'code /home/arjun/Desktop/GitHub/Non-AI-Notes && q'
     alias ls 'ls -al'
     alias bye 'echo "Goodbye" && shutdown now'
@@ -32,7 +32,7 @@ if status is-interactive
     alias c 'code .'
     alias activate_AI_ENV '. ~/Desktop/AI_ENV/bin/activate.fish'
     alias activate_ai_env '. ~/Desktop/AI_ENV/bin/activate.fish'
-    alias activate_kaggle_env '. ~/Desktop/kaggle_env/bin/activate.fish'
+    alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
 
     function cow
