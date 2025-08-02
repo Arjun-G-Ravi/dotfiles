@@ -13,15 +13,15 @@ y = 10
 size = 12.0
 
 [font.normal]
-family = "DejaVu Sans Mono"
+family = "Caskaydia Cove Nerd Font"
 style = "Regular"
 
 [font.bold]
-family = "DejaVu Sans Mono"
+family = "Caskaydia Cove Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "DejaVu Sans Mono"
+family = "Caskaydia Cove Nerd Font"
 style = "Italic"
 
 [font.offset]

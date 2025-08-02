@@ -1,0 +1,12 @@
+alacritty
+fish
+trash-cli
+btop
+hyprland
+hyprlock
+hypridle
+hyprpaper
+hyprmocha
+starship
+waybar
+wofi
