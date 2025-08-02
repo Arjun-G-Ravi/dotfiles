@@ -4,7 +4,7 @@ if status is-interactive
         starship init fish | source
     end
     zoxide init fish | source 
-	set -g fish_greeting ""
+	set -g fish_greeting "cow"
     # Commands to run in interactive sessions can go here
     bind \t forward-char
     bind \cv fish_clipboard_paste
