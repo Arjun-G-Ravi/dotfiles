@@ -4,8 +4,8 @@
   "modules-center": ["hyprland/window"],
   "modules-right": ["network", "bluetooth", "pulseaudio", "battery", "custom/stats", "clock"],
   "clock": {
-    "format": "<span foreground='#f5c2e7'>   </span>{:%d %B (%a) %H:%M}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "<span foreground='#f5c2e7'></span>{:%d %B (%a) %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
     "on-click": "gnome-calendar"
   },
   "battery": {
@@ -55,7 +55,7 @@
     "format": "<span size='13000' foreground='#fab387'>🖥️</span>",
     "tooltip": true,
     "exec": "echo 'CPU: '$(~/.config/waybar/helper/cpu_usage.sh)' | RAM: '$(~/.config/waybar/helper/memory_used.sh)' | GPU: '$(~/.config/waybar/helper/gpu_usage.sh)' | VRAM: '$(~/.config/waybar/helper/gpu_memory.sh)",
-    "interval": 5,
+    "interval": 2,
     "tooltip-format": " {}",
     "on-click": "gnome-system-monitor"
   }
