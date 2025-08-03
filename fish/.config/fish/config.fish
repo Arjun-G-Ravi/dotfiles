@@ -17,20 +17,15 @@ if status is-interactive
     set -Ux fish_user_paths $fish_user_paths /home/arjun/.local/bin
 
     # My custom things
-    alias ai 'code /home/arjun/dev/AI-Notes && q'
-    # alias non-ai 'code /home/arjun/Desktop/GitHub/Non-AI-Notes && q'
+    alias ai 'code /home/arjun/dev/artificial-intelligence-notes && q'
+    alias cs 'code /home/arjun/dev/computer-science-notes && q'
     alias ls 'ls -al'
     alias bye 'echo "Goodbye" && shutdown now'
     alias q 'exit'
-    # alias r 'ranger'
     alias rm 'trash'
     alias cd 'z'
     alias cdi 'zi'
-    # alias g 'cd ~/Desktop/GitHub && r'
-    # alias noob 'cd ~/Desktop/GitHub/Noob-projects/ && code .'
-    # alias fuzzyfind 'code (find . -type d | fzf --preview="ls {}") && q'
     alias c 'code .'
-    alias activate_AI_ENV '. ~/Desktop/AI_ENV/bin/activate.fish'
     alias activate_ai_env '. ~/Desktop/AI_ENV/bin/activate.fish'
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
