@@ -30,14 +30,19 @@ if status is-interactive
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
     
-    # function zapp
-    #     $argv[1] (zi $argv[2])
-    # end
-
     function c
-        code --ozone-platform-hint=wayland (zi $argv) && q
+        set matches (zoxide query --list $argv | wc -l)
+        if test $matches -eq 1
+            code --ozone-platform-hint=wayland (zoxide query $argv)
+            exit
+        else
+            set selected_path (zoxide query --interactive $argv)
+            if test -n "$selected_path"
+                code --ozone-platform-hint=wayland "$selected_path"
+                exit
+            end
+        end
     end
-
 
     function cow
         set inp $argv
