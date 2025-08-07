@@ -25,10 +25,19 @@ if status is-interactive
     alias rm 'trash'
     alias cd 'z'
     alias cdi 'zi'
-    alias c 'code .'
+    # alias c 'code .'
     alias activate_ai_env '. ~/Desktop/AI_ENV/bin/activate.fish'
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
+    
+    # function zapp
+    #     $argv[1] (zi $argv[2])
+    # end
+
+    function c
+        code --ozone-platform-hint=wayland (zi $argv) && q
+    end
+
 
     function cow
         set inp $argv
