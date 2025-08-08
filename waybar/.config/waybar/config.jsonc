@@ -26,7 +26,7 @@
   "network": {
     "format-wifi": "<span size='13000' foreground='#f5e0dc'>🛜</span>",
     "format-ethernet": "<span size='13000' foreground='#f5e0dc'>🌐 </span>",
-    "format-linked": "<span size='13000' foreground='#f5e0dc'>🔗</span>",
+    "format-linked": "<span size='13000' foreground='#f5e0dc'>:0</span>",
     "format-disconnected": "<span size='13000' foreground='#f5e0dc'>🛜❌</span>",
     "tooltip-format-wifi": "{essid} - Signal: {signalStrength}%",
     "tooltip-format-ethernet": "Ethernet Connected",
@@ -34,19 +34,19 @@
     "on-click": "alacritty -e nmtui"
   },
   "bluetooth": {
-    "format": "<span size='13000' foreground='#89b4fa'>🎧❌</span>",
-    "format-disabled": "<span size='13000' foreground='#6c7086'>🎧❌</span>",
-    "format-off": "<span size='13000' foreground='#6c7086'>🎧❌</span>",
-    "format-connected": "<span size='13000' foreground='#a6e3a1'>🎧</span>",
+    "format": "<span size='13000' foreground='#89b4fa'>🔗❌</span>",
+    "format-disabled": "<span size='13000' foreground='#6c7086'>🔗❌</span>",
+    "format-off": "<span size='13000' foreground='#6c7086'>🔗❌</span>",
+    "format-connected": "<span size='13000' foreground='#a6e3a1'>🔗</span>",
     "tooltip-format": "{status}",
     "tooltip-format-connected": "Connected: {device_alias}",
     "on-click": "blueman-manager"
   },
   "pulseaudio": {
     "format": "<span size='13000'>{icon}</span>",
-    "format-muted": "<span size='13000'></span>",
+    "format-muted": "<span size='13000'>🔊❌</span>",
     "format-icons": {
-      "default": [":(", "🔊", "🔊"]
+      "default": ["🔈", "🔉", "🔊"]
     },
     "tooltip-format": "Volume: {volume}%",
     "on-click": "pavucontrol --tab=3"
@@ -59,4 +59,5 @@
     "tooltip-format": " {}",
     "on-click": "alacritty -e btop"
   }
+
 }
