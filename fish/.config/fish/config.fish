@@ -17,8 +17,8 @@ if status is-interactive
     set -Ux fish_user_paths $fish_user_paths /home/arjun/.local/bin
 
     # My custom things
-    alias ai 'code /home/arjun/dev/artificial-intelligence-notes && q'
-    alias cs 'code /home/arjun/dev/computer-science-notes && q'
+    alias ai 'code --ozone-platform-hint=wayland /home/arjun/dev/artificial-intelligence-notes && q'
+    alias cs 'code --ozone-platform-hint=wayland /home/arjun/dev/computer-science-notes && q'
     alias ls 'ls -al'
     alias bye 'echo "Goodbye" && shutdown now'
     alias q 'exit'
