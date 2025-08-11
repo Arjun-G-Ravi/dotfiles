@@ -10,9 +10,6 @@ if status is-interactive
     bind \cv fish_clipboard_paste
     bind \cH backward-kill-word
 
-    # important for fzf; dont change
-    # set -g FZF_CTRL_T_COMMAND "command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
-
     # Setting path
     set -Ux fish_user_paths $fish_user_paths /home/arjun/.local/bin
 
@@ -29,20 +26,41 @@ if status is-interactive
     alias activate_ai_env '. ~/Desktop/AI_ENV/bin/activate.fish'
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
-
     function cd
         if test -z "$argv"
             builtin cd ~
             return
         end
 
+        # If a matching folder exists in current directory, use it
         if test -d "$argv"
             builtin cd "$argv"
-        else
-            z "$argv"
+            return
+        end
+
+        # Otherwise try zoxide
+        set matches (zoxide query --list $argv 2>/dev/null)
+        switch (count $matches)
+            case 0
+                echo "No match found for: $argv"
+            case 1
+                builtin cd $matches[1]
+            case '*'
+                set target (zoxide query --interactive $argv)
+                if test -n "$target"
+                    builtin cd "$target"
+                end
         end
     end
- 
+
+    # Merge normal directory completions + zoxide completions
+    complete -c cd -a "(
+        # Normal directory completions
+        __fish_complete_directories (commandline -ct) '' \
+        # Plus zoxide completions
+        ; zoxide query --list (commandline -ct)
+    )"
+
     function code
         if test -e "$argv"
             command code --ozone-platform-hint=wayland "$argv"
