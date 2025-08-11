@@ -23,22 +23,40 @@ if status is-interactive
     alias bye 'echo "Goodbye" && shutdown now'
     alias q 'exit'
     alias rm 'trash'
-    alias cd 'z'
+    # alias cd 'z'
     alias cdi 'zi'
-    # alias c 'code .'
+    # alias c 'code --ozone-platform-hint=wayland .'
     alias activate_ai_env '. ~/Desktop/AI_ENV/bin/activate.fish'
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
-    
-    function c
+
+    function cd
+        if test -z "$argv"
+            builtin cd ~
+            return
+        end
+
+        if test -d "$argv"
+            builtin cd "$argv"
+        else
+            z "$argv"
+        end
+    end
+ 
+    function code
+        if test -e "$argv"
+            command code --ozone-platform-hint=wayland "$argv"
+            exit
+        end
+
         set matches (zoxide query --list $argv | wc -l)
         if test $matches -eq 1
-            code --ozone-platform-hint=wayland (zoxide query $argv)
+            command code --ozone-platform-hint=wayland (zoxide query $argv)
             exit
         else
             set selected_path (zoxide query --interactive $argv)
             if test -n "$selected_path"
-                code --ozone-platform-hint=wayland "$selected_path"
+                command code --ozone-platform-hint=wayland "$selected_path"
                 exit
             end
         end
