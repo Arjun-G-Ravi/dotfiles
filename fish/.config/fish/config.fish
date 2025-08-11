@@ -106,4 +106,37 @@ if status is-interactive
         end
     end
 
+    function gpu-low
+        # Lower power limit
+        sudo nvidia-smi -pl 100
+
+        # Check if GPU is driving a display
+        set processes (nvidia-smi --query-compute-apps=pid --format=csv,noheader | string trim)
+
+        if test -z "$processes"
+            echo "No active compute processes found. Attempting full GPU reset..."
+            # Reset GPU (only works if not driving a monitor)
+            sudo nvidia-smi --gpu-reset -i 0
+            if test $status -eq 0
+                echo "GPU fully reset and in ultra-low power mode"
+            else
+                echo "GPU reset failed — possibly driving a display"
+            end
+        else
+            echo "GPU in use — Cannot set when to very low power when GPU is in use."
+        end
+
+        echo "GPU set to low-power mode (100W limit)"
+    end
+
+
+    function gpu-high
+        # Restore default power limit automatically
+        set default_limit (nvidia-smi --query-gpu=power.default_limit --format=csv,noheader,nounits) # 390
+        sudo nvidia-smi -pl $default_limit
+
+        echo "GPU set to high-performance mode ($default_limit W limit)"
+    end
+
+
 end

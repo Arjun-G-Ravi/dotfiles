@@ -45,7 +45,7 @@ while true; do
     cpu_val=${cpu_temp%.*}
     for t in "${CPU_THRESHOLDS[@]}"; do
       if (( cpu_val > t )) && [[ ${cpu_notified[$t]} = false ]]; then
-        notify-send -t 10000 "⚠️ CPU Temperature exceeded ${t}°C" "CPU Temperature: ${cpu_temp}°C"
+        notify-send -t 10000 "CPU Temperature exceeded ${t}°C" "CPU Temperature: ${cpu_temp}°C"
         cpu_notified[$t]=true
       elif (( cpu_val < t - 10 )); then
         cpu_notified[$t]=false
@@ -58,7 +58,7 @@ while true; do
     gpu_val=${gpu_temp%.*}
     for t in "${GPU_THRESHOLDS[@]}"; do
       if (( gpu_val > t )) && [[ ${gpu_notified[$t]} = false ]]; then
-        notify-send -t 10000 "⚠️ GPU Temperature exceeded ${t}°C" "GPU Temperature: ${gpu_temp}°C"
+        notify-send -t 10000 "GPU Temperature exceeded ${t}°C" "GPU Temperature: ${gpu_temp}°C"
         gpu_notified[$t]=true
       elif (( gpu_val < t - 10 )); then
         gpu_notified[$t]=false
@@ -70,13 +70,14 @@ while true; do
   if [[ -n "$ram_used" ]]; then
     for t in "${RAM_THRESHOLDS[@]}"; do
       if (( ram_used > t )) && [[ ${ram_notified[$t]} = false ]]; then
-        notify-send -t 10000 "⚠️ RAM Usage exceeded ${t} GB" "RAM Usage: ${ram_used} GB"
+        notify-send -t 10000 "RAM Usage exceeded ${t} GB" "RAM Usage: ${ram_used} GB"
         ram_notified[$t]=true
       elif (( ram_used < t - 3 )); then
         ram_notified[$t]=false
       fi
     done
   fi
+  echo 'hi'
 
-  sleep 10
+  sleep 1
 done
