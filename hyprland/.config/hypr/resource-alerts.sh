@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # Thresholds
-CPU_THRESHOLDS=(70 80 90 95)
+CPU_THRESHOLDS=(65 70 80 90 95)
 GPU_THRESHOLDS=(70 80 90)
-RAM_THRESHOLDS=(10 12 15)
+RAM_THRESHOLDS=(8 10 12 15)
 
 # State trackers
 declare -A cpu_notified gpu_notified ram_notified
