@@ -1,10 +1,9 @@
 #!/bin/bash
-
 # Ensure hyprpaper is running
 if ! pgrep -x "hyprpaper" > /dev/null; then
     echo "Starting hyprpaper..."
     hyprpaper &
-    sleep 1  # Give hyprpaper time to start
+    sleep 1 # Give hyprpaper time to start
 fi
 
 while true; do
@@ -29,14 +28,17 @@ while true; do
     if [ -d "$WALLPAPER_DIR" ] && [ "$(ls -A "$WALLPAPER_DIR"/*.{png,jpg} 2>/dev/null)" ]; then
         # Select a random wallpaper from the directory (supports .png and .jpg files)
         WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -name "*.png" -o -name "*.jpg" \) | shuf -n 1)
-        
+       
         # Log selected wallpaper
         echo "Selected wallpaper: $WALLPAPER"
 
         # Update hyprpaper.conf
         echo "preload = $WALLPAPER" > ~/.config/hypr/hyprpaper.conf
         echo "wallpaper = ,$WALLPAPER" >> ~/.config/hypr/hyprpaper.conf
-        
+
+        # Update hyprlock.conf with the same wallpaper
+        sed -i "s|path = .*|path = $WALLPAPER|" ~/.config/hypr/hyprlock.conf
+
         # Restart hyprpaper to apply changes
         pkill -x hyprpaper
         hyprpaper &
