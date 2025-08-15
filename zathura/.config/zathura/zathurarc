@@ -1,3 +1,6 @@
+# Not going to use this because of the absence of a proper annotation system
+
+
 set selection-clipboard clipboard
 # Increase scroll distance (in pixels)
 set scroll-step 100
@@ -10,3 +13,9 @@ map [normal] <C-k> navigate previous
 # Map J and K to move by pages
 map [normal] <S-j> navigate next
 map [normal] <S-k> navigate previous
+# Disable selection notification
+set selection-notification false
+# Ensure Shift is used for mouse highlighting
+set highlighter-modifier shift
+# Map Ctrl + Left Click to open the current page in Okular
+map [normal] <C-Button1> exec okular --page $PAGE $FILE
