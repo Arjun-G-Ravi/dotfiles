@@ -17,7 +17,7 @@ if status is-interactive
     alias ai 'command code --ozone-platform-hint=wayland /home/arjun/dev/artificial-intelligence-notes && q'
     alias cs 'command code --ozone-platform-hint=wayland /home/arjun/dev/computer-science-notes && q'
     alias ls 'ls -al'
-    alias bye 'echo "Goodbye" && powersave-mode && shutdown now'
+    alias bye 'echo "Goodbye" && shutdown now'
     alias q 'exit'
     alias rm 'trash'
     alias cdi 'zi'
