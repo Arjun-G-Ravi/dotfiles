@@ -1,0 +1,12 @@
+set selection-clipboard clipboard
+# Increase scroll distance (in pixels)
+set scroll-step 100
+# Ensure j and k are mapped to scroll down and up
+map [normal] j scroll down
+map [normal] k scroll up
+# Map Ctrl+j and Ctrl+k to move by pages
+map [normal] <C-j> navigate next
+map [normal] <C-k> navigate previous
+# Map J and K to move by pages
+map [normal] <S-j> navigate next
+map [normal] <S-k> navigate previous
