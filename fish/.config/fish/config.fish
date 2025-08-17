@@ -24,7 +24,7 @@ if status is-interactive
     alias activate_ai_env '. ~/Desktop/AI_ENV/bin/activate.fish'
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
-    
+     
     function cd
         if test -z "$argv"
             builtin cd ~
