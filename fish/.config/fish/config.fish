@@ -21,7 +21,8 @@ if status is-interactive
     alias q 'exit'
     alias rm 'trash'
     alias cdi 'zi'
-    alias activate_ai_env '. ~/Desktop/AI_ENV/bin/activate.fish'
+    # alias activate_ai_env '. ~/Desktop/AI_ENV/bin/activate.fish'
+    alias activate_cifar_env '. ~/cifar_env/bin/activate.fish' 
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
      
