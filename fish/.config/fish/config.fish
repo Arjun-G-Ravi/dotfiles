@@ -112,7 +112,7 @@ if status is-interactive
     end
 
     function pull_obsidian
-    cd /home/arjun/myvault/obsidian-backup; git pull
+        cd /home/arjun/myvault/obsidian-backup; git pull
     end
 
     function nuke
@@ -153,8 +153,8 @@ if status is-interactive
 
 
     function performance-mode
-        sudo nvidia-smi -pl 390
-        echo "GPU set to high-power mode (390W limit)"
+        sudo nvidia-smi -pl 400
+        echo "GPU set to high-power mode (400W limit)"
         sudo cpupower frequency-set -g performance
         echo "CPU set to performance mode"
         notify-send "Batmobile" "Activated Performance Mode"
