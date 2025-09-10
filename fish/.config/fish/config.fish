@@ -26,32 +26,6 @@ if status is-interactive
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
      
-    # function cd
-    #     if test -z "$argv"
-    #         builtin cd ~
-    #         return
-    #     end
-
-    #     # If a matching folder exists in current directory, use it
-    #     if test -d "$argv"
-    #         builtin cd "$argv"
-    #         return
-    #     end
-
-    #     # Otherwise try zoxide
-    #     set matches (zoxide query --list $argv 2>/dev/null)
-    #     switch (count $matches)
-    #         case 0
-    #             echo "No match found for: $argv"
-    #         case 1
-    #             builtin cd $matches[1]
-    #         case '*'
-    #             set target (zoxide query --interactive $argv)
-    #             if test -n "$target"
-    #                 builtin cd "$target"
-    #             end
-    #     end
-    # end
     function cd
         if test -z "$argv"
             builtin cd ~
@@ -86,42 +60,6 @@ if status is-interactive
         end
     end
 
-
-    # function cd
-    #     if test -z "$argv"
-    #         builtin cd ~
-    #         return
-    #     end
-
-    #     # Trim trailing slashes for cleaner querying
-    #     set query (string trim -r -c '/' -- $argv)
-
-    #     # First, try builtin cd (handles absolute/relative/exact paths)
-    #     set oldpwd $PWD
-    #     builtin cd "$argv"
-    #     if test $status -eq 0
-    #         # Success, no need to revert
-    #         return
-    #     end
-    #     # Failed, revert to old dir
-    #     builtin cd "$oldpwd"
-
-    #     # If builtin failed, fallback to zoxide fuzzy matching on trimmed query
-    #     set matches (zoxide query --list $query 2>/dev/null)
-    #     switch (count $matches)
-    #         case 0
-    #             echo "No match found for: $argv"
-    #         case 1
-    #             builtin cd $matches[1]
-    #         case '*'
-    #             set target (zoxide query --interactive $query)
-    #             if test -n "$target"
-    #                 builtin cd "$target"
-    #             end
-    #     end
-    # end 
-
-
     # Merge normal directory completions + zoxide completions
     complete -c cd -a "(
         # Normal directory completions
@@ -129,25 +67,6 @@ if status is-interactive
         # Plus zoxide completions
         ; zoxide query --list (commandline -ct)
     )"
-
-    # function code
-    #     if test -e "$argv"
-    #         command code --ozone-platform-hint=wayland "$argv"
-    #         exit
-    #     end
-
-    #     set matches (zoxide query --list $argv | wc -l)
-    #     if test $matches -eq 1
-    #         command code --ozone-platform-hint=wayland (zoxide query $argv)
-    #         exit
-    #     else
-    #         set selected_path (zoxide query --interactive $argv)
-    #         if test -n "$selected_path"
-    #             command code --ozone-platform-hint=wayland "$selected_path"
-    #             exit
-    #         end
-    #     end
-    # end
 
 
     function code
@@ -188,13 +107,13 @@ if status is-interactive
         end
     end
 
-    # function push_obsidian 
-    #     cd /home/arjun/Documents/general/_obsidian-backup;git add .; and git commit -m "Added more to obsidian"; and git push
-    # end
+    function push_obsidian 
+        cd /home/arjun/myvault/obsidian-backup;git add .; and git commit -m "Added more to obsidian"; and git push
+    end
 
-    # function pull_obsidian
-    # cd /home/arjun/Documents/general/_obsidian-backup; git pull
-    # end
+    function pull_obsidian
+    cd /home/arjun/myvault/obsidian-backup; git pull
+    end
 
     function nuke
         if test -z $argv
