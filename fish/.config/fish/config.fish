@@ -26,32 +26,101 @@ if status is-interactive
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
      
+    # function cd
+    #     if test -z "$argv"
+    #         builtin cd ~
+    #         return
+    #     end
+
+    #     # If a matching folder exists in current directory, use it
+    #     if test -d "$argv"
+    #         builtin cd "$argv"
+    #         return
+    #     end
+
+    #     # Otherwise try zoxide
+    #     set matches (zoxide query --list $argv 2>/dev/null)
+    #     switch (count $matches)
+    #         case 0
+    #             echo "No match found for: $argv"
+    #         case 1
+    #             builtin cd $matches[1]
+    #         case '*'
+    #             set target (zoxide query --interactive $argv)
+    #             if test -n "$target"
+    #                 builtin cd "$target"
+    #             end
+    #     end
+    # end
     function cd
         if test -z "$argv"
             builtin cd ~
             return
         end
 
-        # If a matching folder exists in current directory, use it
-        if test -d "$argv"
-            builtin cd "$argv"
+        # Trim trailing slashes for cleaner querying
+        set query (string trim -r -c '/' -- $argv)
+
+        # Try builtin cd silently; capture status without error output
+        set oldpwd $PWD
+        builtin cd "$argv" 2>/dev/null
+        if test $status -eq 0
+            # Success, no need to revert
             return
         end
+        # Failed, revert to old dir
+        builtin cd "$oldpwd"
 
-        # Otherwise try zoxide
-        set matches (zoxide query --list $argv 2>/dev/null)
+        # Fallback to zoxide fuzzy matching on trimmed query
+        set matches (zoxide query --list $query 2>/dev/null)
         switch (count $matches)
             case 0
                 echo "No match found for: $argv"
             case 1
                 builtin cd $matches[1]
             case '*'
-                set target (zoxide query --interactive $argv)
+                set target (zoxide query --interactive $query)
                 if test -n "$target"
                     builtin cd "$target"
                 end
         end
     end
+
+
+    # function cd
+    #     if test -z "$argv"
+    #         builtin cd ~
+    #         return
+    #     end
+
+    #     # Trim trailing slashes for cleaner querying
+    #     set query (string trim -r -c '/' -- $argv)
+
+    #     # First, try builtin cd (handles absolute/relative/exact paths)
+    #     set oldpwd $PWD
+    #     builtin cd "$argv"
+    #     if test $status -eq 0
+    #         # Success, no need to revert
+    #         return
+    #     end
+    #     # Failed, revert to old dir
+    #     builtin cd "$oldpwd"
+
+    #     # If builtin failed, fallback to zoxide fuzzy matching on trimmed query
+    #     set matches (zoxide query --list $query 2>/dev/null)
+    #     switch (count $matches)
+    #         case 0
+    #             echo "No match found for: $argv"
+    #         case 1
+    #             builtin cd $matches[1]
+    #         case '*'
+    #             set target (zoxide query --interactive $query)
+    #             if test -n "$target"
+    #                 builtin cd "$target"
+    #             end
+    #     end
+    # end 
+
 
     # Merge normal directory completions + zoxide completions
     complete -c cd -a "(
@@ -61,24 +130,54 @@ if status is-interactive
         ; zoxide query --list (commandline -ct)
     )"
 
+    # function code
+    #     if test -e "$argv"
+    #         command code --ozone-platform-hint=wayland "$argv"
+    #         exit
+    #     end
+
+    #     set matches (zoxide query --list $argv | wc -l)
+    #     if test $matches -eq 1
+    #         command code --ozone-platform-hint=wayland (zoxide query $argv)
+    #         exit
+    #     else
+    #         set selected_path (zoxide query --interactive $argv)
+    #         if test -n "$selected_path"
+    #             command code --ozone-platform-hint=wayland "$selected_path"
+    #             exit
+    #         end
+    #     end
+    # end
+
+
     function code
-        if test -e "$argv"
-            command code --ozone-platform-hint=wayland "$argv"
-            exit
+        if test -z "$argv"
+            command code --ozone-platform-hint=wayland ~
+            return
         end
 
-        set matches (zoxide query --list $argv | wc -l)
-        if test $matches -eq 1
-            command code --ozone-platform-hint=wayland (zoxide query $argv)
-            exit
-        else
-            set selected_path (zoxide query --interactive $argv)
+        # Trim trailing slashes for cleaner querying
+        set query (string trim -r -c '/' -- $argv)
+
+        # Use zoxide fuzzy matching first
+        set matches (zoxide query --list $query 2>/dev/null)
+        if test (count $matches) -eq 1
+            command code --ozone-platform-hint=wayland $matches[1]
+            return
+        else if test (count $matches) -gt 1
+            set selected_path (zoxide query --interactive $query)
             if test -n "$selected_path"
                 command code --ozone-platform-hint=wayland "$selected_path"
-                exit
+                return
+            end
+        else
+            # Fallback to opening exact path if no Zoxide match
+            if command code --ozone-platform-hint=wayland "$argv" 2>/dev/null
+                return
             end
         end
     end
+
 
     function push
         set inp $argv
