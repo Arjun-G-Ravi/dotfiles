@@ -6,8 +6,8 @@ GPU_THRESHOLDS=(70 80 90)
 RAM_THRESHOLDS=(8 10 12 15)
 
 # Usage thresholds
-CPU_USAGE_THRESHOLD=25        # %
-GPU_USAGE_THRESHOLD=25        # %
+CPU_USAGE_THRESHOLD=75        # %
+GPU_USAGE_THRESHOLD=50        # %
 
 # State trackers
 declare -A cpu_notified gpu_notified ram_notified

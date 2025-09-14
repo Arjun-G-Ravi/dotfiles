@@ -25,7 +25,7 @@ if status is-interactive
     alias activate_cifar_env '. ~/cifar_env/bin/activate.fish' 
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
-     
+    alias check_cuda='activate_kaggle_env; python3 -c "import torch; print(f\'CUDA available: {torch.cuda.is_available()}\')"'     
     function cd
         if test -z "$argv"
             builtin cd ~
@@ -68,35 +68,40 @@ if status is-interactive
         ; zoxide query --list (commandline -ct)
     )"
 
-
     function code
-        if test -z "$argv"
-            command code --ozone-platform-hint=wayland ~
-            return
+        # If no args, open home in VS Code, then close terminal
+        if test (count $argv) -eq 0
+            command code --ozone-platform-hint=wayland ~ &
+            disown
+            exit
         end
 
-        # Trim trailing slashes for cleaner querying
+        # Trim trailing slashes from the query
         set query (string trim -r -c '/' -- $argv)
 
-        # Use zoxide fuzzy matching first
+        # Try zoxide fuzzy matches
         set matches (zoxide query --list $query 2>/dev/null)
+
         if test (count $matches) -eq 1
-            command code --ozone-platform-hint=wayland $matches[1]
-            return
+            command code --ozone-platform-hint=wayland $matches[1] &
+            disown
+            exit
         else if test (count $matches) -gt 1
             set selected_path (zoxide query --interactive $query)
             if test -n "$selected_path"
-                command code --ozone-platform-hint=wayland "$selected_path"
-                return
+                command code --ozone-platform-hint=wayland "$selected_path" &
+                disown
+                exit
             end
         else
-            # Fallback to opening exact path if no Zoxide match
-            if command code --ozone-platform-hint=wayland "$argv" 2>/dev/null
-                return
+            # Fallback: try to open the raw argument
+            command code --ozone-platform-hint=wayland $argv 2>/dev/null &
+            if test $status -eq 0
+                disown
+                exit
             end
         end
     end
-
 
     function push
         set inp $argv
