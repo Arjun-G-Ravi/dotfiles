@@ -21,7 +21,7 @@ if status is-interactive
     alias q 'exit'
     alias rm 'trash'
     alias cdi 'zi'
-    # alias activate_ai_env '. ~/Desktop/AI_ENV/bin/activate.fish'
+    alias activate_ai_env '. ~/ai_env/bin/activate.fish'
     alias activate_cifar_env '. ~/cifar_env/bin/activate.fish' 
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
     alias logout 'sudo pkill -u arjun' # my username
@@ -40,6 +40,7 @@ if status is-interactive
         builtin cd "$argv" 2>/dev/null
         if test $status -eq 0
             # Success, no need to revert
+            ls -al
             return
         end
         # Failed, revert to old dir
@@ -57,7 +58,9 @@ if status is-interactive
                 if test -n "$target"
                     builtin cd "$target"
                 end
+                # ls -al
         end
+        ls
     end
 
     # Merge normal directory completions + zoxide completions
@@ -76,6 +79,13 @@ if status is-interactive
             exit
         end
 
+        # If explicitly opening current directory, skip zoxide/fuzzy logic
+        if test (count $argv) -eq 1; and begin test "$argv[1]" = "."; or test "$argv[1]" = "./"; end
+            command code --ozone-platform-hint=wayland . &
+            disown
+            exit
+        end
+
         # Trim trailing slashes from the query
         set query (string trim -r -c '/' -- $argv)
 
@@ -83,7 +93,7 @@ if status is-interactive
         set matches (zoxide query --list $query 2>/dev/null)
 
         if test (count $matches) -eq 1
-            command code --ozone-platform-hint=wayland $matches[1] &
+            command code --ozone-platform-hint=wayland "$matches[1]" &
             disown
             exit
         else if test (count $matches) -gt 1
@@ -102,7 +112,6 @@ if status is-interactive
             end
         end
     end
-
     function push
         set inp $argv
         if test -z "$argv"
