@@ -6,13 +6,11 @@
 
   "custom/vpn": {
     "format": "{}",
-    "interval": 3,
+    "interval": 1,
     "return-type": "json",
-    // "exec": "VPN_NAME=$(nmcli -t -f NAME,TYPE connection show --active | grep -i 'proton' | head -n1 | cut -d: -f1); COUNTRY_CODE=$(echo $VPN_NAME | awk '{print $2}' | cut -d'-' -f1); case \"$COUNTRY_CODE\" in CA) COUNTRY='Canada';; JP) COUNTRY='Japan';; MX) COUNTRY='Mexico';; NL) COUNTRY='Netherlands';; NO) COUNTRY='Norway';; PL) COUNTRY='Poland';; RO) COUNTRY='Romania';; SG) COUNTRY='Singapore';; CH) COUNTRY='Switzerland';; US) COUNTRY='United States';; *) COUNTRY='Unknown';; esac; if [ -n \"$VPN_NAME\" ]; then echo \"{\\\"text\\\": \\\"<span size='13000' foreground='#a6e3a1'>🛡️($COUNTRY)</span>\\\", \\\"tooltip\\\": \\\" $VPN_NAME ($COUNTRY)\\\"}\"; else echo \"{\\\"text\\\": \\\"<span size='13000' foreground='#eba0ac'>🛡️❌</span>\\\", \\\"tooltip\\\": \\\"VPN Disconnected\\\"}\"; fi",
-    "exec": "VPN_NAME=$(nmcli -t -f NAME,TYPE connection show --active | grep -i 'proton' | head -n1 | cut -d: -f1); COUNTRY_CODE=$(echo $VPN_NAME | awk '{print $2}' | cut -d'-' -f1); DEV=proton0; RX=$(cat /sys/class/net/$DEV/statistics/rx_bytes 2>/dev/null); TX=$(cat /sys/class/net/$DEV/statistics/tx_bytes 2>/dev/null); RX_MB=$(awk \"BEGIN {printf \\\"%.2f\\\", $RX/1024/1024}\"); TX_MB=$(awk \"BEGIN {printf \\\"%.2f\\\", $TX/1024/1024}\"); case \"$COUNTRY_CODE\" in CA) COUNTRY='Canada';; JP) COUNTRY='Japan';; MX) COUNTRY='Mexico';; NL) COUNTRY='Netherlands';; NO) COUNTRY='Norway';; PL) COUNTRY='Poland';; RO) COUNTRY='Romania';; SG) COUNTRY='Singapore';; CH) COUNTRY='Switzerland';; US) COUNTRY='United States';; *) COUNTRY='Unknown';; esac; if [ -n \"$VPN_NAME\" ]; then echo \"{\\\"text\\\": \\\"<span size='13000' foreground='#a6e3a1'>🛡️($COUNTRY)</span>\\\", \\\"tooltip\\\": \\\"$VPN_NAME \\nRX: $RX_MB MB\\nTX: $TX_MB MB\\\"}\"; else echo \"{\\\"text\\\": \\\"<span size='13000' foreground='#eba0ac'>🛡️❌</span>\\\", \\\"tooltip\\\": \\\"VPN Disconnected\\\"}\"; fi",
+    "exec": "~/.config/waybar/helper/vpn_status.sh",
     "on-click": "protonvpn-app"
   },
-
 
   "clock": {
     "format": "<span foreground='#f5c2e7'></span>{:%d %B (%a) %H:%M}",
