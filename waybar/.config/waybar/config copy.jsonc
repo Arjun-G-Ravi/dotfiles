@@ -1,0 +1,66 @@
+{
+  "position": "top",
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": ["network", "bluetooth", "pulseaudio", "battery", "custom/stats", "clock"],
+
+  "network": {
+    "format-wifi": "<span size='13000' foreground='#f5e0dc'>🛜</span>",
+    "format-ethernet": "<span size='13000' foreground='#f5e0dc'>🛜(vpn)</span>",
+    "format-linked": "<span size='13000' foreground='#f5e0dc'>:0</span>",
+    "format-disconnected": "<span size='13000' foreground='#f5e0dc'>🛜❌</span>",
+    "tooltip-format-wifi": "{essid} - Signal: {signalStrength}%",
+    "tooltip-format-ethernet": "Ethernet Connected",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "alacritty -e nmtui"
+  },
+
+  "clock": {
+    "format": "<span foreground='#f5c2e7'></span>{:%d %B (%a) %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
+    "on-click": "gnome-calendar"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "<span size='13000' foreground='#a6e3a1'>{icon} </span> {capacity}%",
+    "format-warning": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {capacity}%",
+    "format-critical": "<span size='13000' foreground='#E38C8F'>{icon} </span> {capacity}%",
+    "format-charging": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-plugged": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-alt": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {time}",
+    "format-full": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip-format": "{time}"
+  },
+
+  "bluetooth": {
+    "format": "<span size='13000' foreground='#89b4fa'>🔗❌</span>",
+    "format-disabled": "<span size='13000' foreground='#6c7086'>🔗❌</span>",
+    "format-off": "<span size='13000' foreground='#6c7086'>🔗❌</span>",
+    "format-connected": "<span size='13000' foreground='#a6e3a1'>🔗</span>",
+    "tooltip-format": "{status}",
+    "tooltip-format-connected": "Connected: {device_alias}",
+    "on-click": "blueman-manager"
+  },
+  "pulseaudio": {
+    "format": "<span size='13000'>{icon}</span>",
+    "format-muted": "<span size='13000'>🔊❌</span>",
+    "format-icons": {
+      "default": ["🔈", "🔉", "🔊"]
+    },
+    "tooltip-format": "Volume: {volume}%",
+    "on-click": "pavucontrol --tab=3"
+  },
+  "custom/stats": {
+    "format": "<span size='13000' foreground='#fab387'>🖥️</span>",
+    "tooltip": true,
+    "exec": "echo 'CPU: '$(~/.config/waybar/helper/cpu_usage.sh)' | RAM: '$(~/.config/waybar/helper/memory_used.sh)' | GPU: '$(~/.config/waybar/helper/gpu_usage.sh)' | VRAM: '$(~/.config/waybar/helper/gpu_memory.sh)",
+    "interval": 2,
+    "tooltip-format": " {}",
+    "on-click": "alacritty -e btop"
+  }
+
+}

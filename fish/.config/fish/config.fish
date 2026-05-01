@@ -21,9 +21,12 @@ if status is-interactive
     alias q 'exit'
     alias rm 'trash'
     alias cdi 'zi'
+    alias pdf-tor 'firejail --net=none --noprofile --whitelist="/home/arjun/software/tor-browser-linux-x86_64-14.5.7" --whitelist="/home/arjun/Downloads" --read-only="/home/arjun/Downloads" sh /home/arjun/software/tor-browser-linux-x86_64-14.5.7/tor-browser/Browser/start-tor-browser'
+    alias tor /home/arjun/software/tor-browser-linux-x86_64-14.5.7/tor-browser/Browser/start-tor-browser
     alias activate_ai_env '. ~/ai_env/bin/activate.fish'
     alias activate_cifar_env '. ~/cifar_env/bin/activate.fish' 
     alias activate_kaggle_env '. ~/kaggle_env/bin/activate.fish'
+    
     alias logout 'sudo pkill -u arjun' # my username
     alias check_cuda='activate_kaggle_env; python3 -c "import torch; print(f\'CUDA available: {torch.cuda.is_available()}\')"'     
     function cd
@@ -175,3 +178,4 @@ if status is-interactive
     end
 
 end
+fnm env --use-on-cd --shell fish | source

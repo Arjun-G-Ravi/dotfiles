@@ -3,11 +3,11 @@
 # Thresholds (temperatures)
 CPU_THRESHOLDS=(65 70 80 90 95)
 GPU_THRESHOLDS=(70 80 90)
-RAM_THRESHOLDS=(8 10 12 15)
+RAM_THRESHOLDS=(10 12 15)
 
-# Usage thresholds
+# Usage thresholds for turning on power mode
 CPU_USAGE_THRESHOLD=75        # %
-GPU_USAGE_THRESHOLD=50        # %
+GPU_USAGE_THRESHOLD=75        # %
 
 # State trackers
 declare -A cpu_notified gpu_notified ram_notified
